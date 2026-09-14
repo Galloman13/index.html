@@ -60,21 +60,19 @@
             color: white;
         }
         #btn-no {
-    background-color: #e84118;
-    color: white;
-    position: absolute;
-    z-index: 10;
-    right: 20%; /* Esto evita que aparezca oculto fuera de la pantalla táctil */
-}
-
+            background-color: #e84118;
+            color: white;
+            position: absolute;
+            z-index: 10;
+            right: 20%;
+        }
     </style>
 </head>
 <body>
 
     <div class="contenedor">
-        <!-- Puedes cambiar este emoji por un link de imagen/GIF si quieres -->
         <div class="gif-placeholder">🥺👉👈</div>
-        <h1>¿Te gustaría ir por un mate conmigo?</h1>
+        <h1>¿Te gustaría ir por un café conmigo?</h1>
         
         <div class="botones">
             <button id="btn-si">¡SÍ!</button>
@@ -86,22 +84,21 @@
         const btnSi = document.getElementById('btn-si');
         const btnNo = document.getElementById('btn-no');
 
-        // CONFIGURACIÓN DE TU WHATSAPP
-        // Cambia el número abajo. Ej: "521234567890" (Código de país + número, sin el +)
-        const tuTelefono = "59899559624"; 
-        const mensaje = encodeURIComponent("¡Obvio que sí! ☕ Dime cuándo y dónde.");
+        // TU CONFIGURACIÓN DE WHATSAPP (Líneas 75 y 76)
+        const telefonoUruguay = "59899559624";
+        const mensajeParaTi = "¡Obvio que sí! ☕ Dime cuándo y dónde.";
 
         // Acción al presionar SÍ
         btnSi.addEventListener('click', () => {
-            window.location.href = `https://wa.me{tuTelefono}?text=${mensaje}`;
+            const linkFinal = "https://wa.me" + telefonoUruguay + "?text=" + encodeURIComponent(mensajeParaTi);
+            window.location.href = linkFinal;
         });
 
-        // Función para mover el botón NO de forma aleatoria
+        // Función para mover el botón NO
         function moverBotonNo() {
             const widthMax = window.innerWidth - btnNo.offsetWidth - 20;
             const heightMax = window.innerHeight - btnNo.offsetHeight - 20;
 
-            // Generar posiciones aleatorias en la pantalla
             const randomX = Math.max(10, Math.floor(Math.random() * widthMax));
             const randomY = Math.max(10, Math.floor(Math.random() * heightMax));
 
@@ -109,9 +106,8 @@
             btnNo.style.top = randomY + 'px';
         }
 
-        // Eventos optimizados para celular (detectan el dedo antes de hacer click)
         btnNo.addEventListener('touchstart', (e) => {
-            e.preventDefault(); // Evita que el celular haga el click normal
+            e.preventDefault();
             moverBotonNo();
         });
 
