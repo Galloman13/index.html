@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Quieres salir conmigo?</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffe6e6;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            overflow: hidden;
+        }
+        .contenedor {
+            padding: 20px;
+            max-width: 90%;
+        }
+        h1 {
+            color: #d63384;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        .gif-placeholder {
+            font-size: 5rem;
+            margin-bottom: 20px;
+        }
+        .botones {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-top: 20px;
+            position: relative;
+            min-height: 150px;
+            width: 100%;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            transition: transform 0.1s ease;
+        }
+        #btn-si {
+            background-color: #4cd137;
+            color: white;
+        }
+        #btn-no {
+            background-color: #e84118;
+            color: white;
+            position: absolute;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="contenedor">
+        <!-- Puedes cambiar este emoji por un link de imagen/GIF si quieres -->
+        <div class="gif-placeholder">🥺👉👈</div>
+        <h1>¿Te gustaría ir por un café conmigo?</h1>
+        
+        <div class="botones">
+            <button id="btn-si">¡SÍ!</button>
+            <button id="btn-no">NO</button>
+        </div>
+    </div>
+
+    <script>
+        const btnSi = document.getElementById('btn-si');
+        const btnNo = document.getElementById('btn-no');
+
+        // CONFIGURACIÓN DE TU WHATSAPP
+        // Cambia el número abajo. Ej: "521234567890" (Código de país + número, sin el +)
+        const tuTelefono = "099559624"; 
+        const mensaje = encodeURIComponent("¡Obvio que sí! ☕ Dime cuándo y dónde.");
+
+        // Acción al presionar SÍ
+        btnSi.addEventListener('click', () => {
+            window.location.href = `https://wa.me{tuTelefono}?text=${mensaje}`;
+        });
+
+        // Función para mover el botón NO de forma aleatoria
+        function moverBotonNo() {
+            const widthMax = window.innerWidth - btnNo.offsetWidth - 20;
+            const heightMax = window.innerHeight - btnNo.offsetHeight - 20;
+
+            // Generar posiciones aleatorias en la pantalla
+            const randomX = Math.max(10, Math.floor(Math.random() * widthMax));
+            const randomY = Math.max(10, Math.floor(Math.random() * heightMax));
+
+            btnNo.style.left = randomX + 'px';
+            btnNo.style.top = randomY + 'px';
+        }
+
+        // Eventos optimizados para celular (detectan el dedo antes de hacer click)
+        btnNo.addEventListener('touchstart', (e) => {
+            e.preventDefault(); // Evita que el celular haga el click normal
+            moverBotonNo();
+        });
+
+        btnNo.addEventListener('pointerenter', () => {
+            moverBotonNo();
+        });
+    </script>
+</body>
+</html>
