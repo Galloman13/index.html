@@ -60,11 +60,13 @@
             color: white;
         }
         #btn-no {
-            background-color: #e84118;
-            color: white;
-            position: absolute;
-            z-index: 10;
-        }
+    background-color: #e84118;
+    color: white;
+    position: absolute;
+    z-index: 10;
+    right: 20%; /* Esto evita que aparezca oculto fuera de la pantalla táctil */
+}
+
     </style>
 </head>
 <body>
@@ -72,7 +74,7 @@
     <div class="contenedor">
         <!-- Puedes cambiar este emoji por un link de imagen/GIF si quieres -->
         <div class="gif-placeholder">🥺👉👈</div>
-        <h1>¿Te gustaría ir por un café conmigo?</h1>
+        <h1>¿Te gustaría ir por un mate conmigo?</h1>
         
         <div class="botones">
             <button id="btn-si">¡SÍ!</button>
@@ -86,7 +88,7 @@
 
         // CONFIGURACIÓN DE TU WHATSAPP
         // Cambia el número abajo. Ej: "521234567890" (Código de país + número, sin el +)
-        const tuTelefono = "099559624"; 
+        const tuTelefono = "+598099559624"; 
         const mensaje = encodeURIComponent("¡Obvio que sí! ☕ Dime cuándo y dónde.");
 
         // Acción al presionar SÍ
